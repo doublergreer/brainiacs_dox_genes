@@ -1,0 +1,52 @@
+```{r setup, include=FALSE}
+output: html_document
+output: github_document 
+knitr::opts_chunk$set(echo = TRUE)
+source("../../util/00_our_first_function_lesson.R")
+library(GenomicRanges)
+library(IRanges)
+library(dplyr)
+library(tidyr)
+library(tibble)
+library(readr)
+library(ggplot2)
+library(purrr)
+library(magrittr)
+library(pheatmap)
+library(textshape)
+library(Rcpp)
+library(DESeq2)
+library(stringr)
+```
+
+data <- read.csv("/scratch/Shares/rinnclass/MASTER_CLASS/STUDENTS/genehomies/RESULTS/HUMAN/human_gene_names.csv")
+
+sig_genes <- read.csv("/scratch/Shares/rinnclass/MASTER_CLASS/STUDENTS/genehomies/RESULTS/HUMAN/sig_genes_human.csv")
+
+significant ortholog human/mouse
+load("/scratch/Shares/rinnclass/MASTER_CLASS/STUDENTS/genehomies/RESULTS/MOUSEVSHUMAN/orthologs_results.RData")
+
+```{r plotting counts}
+#Load counts data for mouse
+MS_counts <- read.table("/scratch/Shares/rinnclass/MASTER_CLASS/STUDENTS/genehomies/DATA/MOUSE/salmon.merged.gene_counts.tsv", header=TRUE, row.names=1)
+#Load counts data for human
+human_counts <- read.table("/scratch/Shares/rinnclass/MASTER_CLASS/STUDENTS/genehomies/DATA/HUMAN/salmon.merged.gene_counts.tsv", header=TRUE, row.names=1)
+
+human_conserved_counts <- human_counts %>%
+  filter(gene_name %in% list("HTR5A", "IER3","CCDC3","MEI1","RBM24","DPPA3","PSTPIP2"))
+
+human_gene_data_list <- lapply(human_brain_counts$gene_name, function(gene) {
+  human_brain_counts[human_brain_counts$gene_name == gene, ]
+})
+
+human_split <- strsplit(colnames(human_gene_data_list[[1]]), '_')
+
+
+mouse_brain_counts <- MS_counts %>%
+  filter(gene_name %in% list("Htr5a", "Ier3"))
+
+mouse_gene_data_list <- lapply(mouse_brain_counts$gene_name, function(gene) {
+  mouse_brain_counts[mouse_brain_counts$gene_name == gene, ]
+})
+
+#Develop an if else statement to see if the human and mouse genes are going towards the same direction 
