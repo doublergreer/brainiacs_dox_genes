@@ -120,24 +120,28 @@ human_plot_df$Time <- factor(human_plot_df$Time, levels = as.character(time_poin
 
 ``` r
 # Mouse plot
-ggplot(mouse_plot_df, aes(x = Time, y = avg, group = gene_id)) +
+mouse_viewable_plot <- ggplot(mouse_plot_df, aes(x = Time, y = avg, group = gene_id)) +
   geom_line() +
   geom_errorbar(aes(ymin = avg - sd, ymax = avg + sd), width = 0.2) +
   labs(x = 'Time (hours)', y = 'Average TPM') +
   ggtitle('Average TPM of Conserved Mouse Genes across Time Points') +
   facet_wrap(~ gene_name, scales = "free_y")
+
+print(mouse_viewable_plot)
 ```
 
 ![](Analysis_of_Human_and_Mouse_Gene_Expression_files/figure-gfm/Plotting%20TPM%20Data%20from%20Mouse%20and%20Human%20Data-1.png)<!-- -->
 
 ``` r
 # Human plot
-ggplot(human_plot_df, aes(x = Time, y = avg, group = gene_id)) +
+human_viewable_plot <- ggplot(human_plot_df, aes(x = Time, y = avg, group = gene_id)) +
   geom_line() +
   geom_errorbar(aes(ymin = avg - sd, ymax = avg + sd), width = 0.2) +
   labs(x = 'Time (hours)', y = 'Average TPM') +
   ggtitle('Average TPM of Conserved Human Genes across Time Points') +
   facet_wrap(~ gene_name, scales = "free_y")
+
+print(human_viewable_plot)
 ```
 
 ![](Analysis_of_Human_and_Mouse_Gene_Expression_files/figure-gfm/Plotting%20TPM%20Data%20from%20Mouse%20and%20Human%20Data-2.png)<!-- -->
@@ -466,7 +470,7 @@ trend_counts <- lfc_match %>%
   summarise(n = n(), .groups = "drop")
 
 # Plot the trend counts
-ggplot(trend_counts, aes(x = Trend, y = n, fill = Species)) +
+Viewable_trend_bar_plot <- ggplot(trend_counts, aes(x = Trend, y = n, fill = Species)) +
   geom_col(position = "dodge") +
   labs(
     title = "Gene Regulation Trends by Species (LFC 0h -> 96h)",
@@ -476,6 +480,8 @@ ggplot(trend_counts, aes(x = Trend, y = n, fill = Species)) +
   scale_fill_brewer(palette = "Set1") +
   theme_minimal() +
   theme(text = element_text(size = 12))
+
+print(Viewable_trend_bar_plot)
 ```
 
 ![](Analysis_of_Human_and_Mouse_Gene_Expression_files/figure-gfm/Plotting%20Bar%20Plot-1.png)<!-- -->
