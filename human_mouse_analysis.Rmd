@@ -67,7 +67,7 @@ time_points <- c("0", "0.5", "1", "2", "2.5", "3", "3.5", "4", "4.5", "5", "5.5"
 gene_df <- human_gene_data_list[[1]]
 
 # Initialize list to store avg/sd for each timepoint
-avg_sd_list <- list()
+human_avg_sd_list <- list()
 
 # Loop through each time point and calculate stats
 for (tp in time_points) {
@@ -77,15 +77,15 @@ for (tp in time_points) {
   if (length(cols) > 0) {
     avg <- rowMeans(gene_df[, cols])
     std_dev <- apply(gene_df[, cols], 1, sd)
-    avg_sd_list[[tp]] <- data.frame(avg, std_dev)
+    human_avg_sd_list[[tp]] <- data.frame(avg, std_dev)
   }
 }
 
 # Combine all into one dataframe
-combined_avg_sd <- do.call(cbind, avg_sd_list)
+combined_avg_sd <- do.call(cbind, human_avg_sd_list)
 
 # Rename columns: timepoint_avg, timepoint_sd
-colnames(combined_avg_sd) <- as.vector(t(outer(names(avg_sd_list), c("avg", "sd"), paste, sep = "_")))
+colnames(combined_avg_sd) <- as.vector(t(outer(names(human_avg_sd_list), c("avg", "sd"), paste, sep = "_")))
 
 # View result
 head(combined_avg_sd)
@@ -98,9 +98,28 @@ head(combined_avg_sd)
 # Define the split point
 split_point <- 5.5
 
+# Prepare data for plotting
+human_df_list <- list()
+for (gene in unique(human_brain_counts$gene_name)) {
+  gene_df <- human_brain_counts %>% filter(gene_name == gene)
+  human_avg_sd_list <- list()
+  for (tp in time_points) {
+    cols <- grep(paste0("gfp_", tp, "_"), colnames(gene_df))
+    if (length(cols) > 0) {
+      avg <- rowMeans(gene_df[, cols])
+      std_dev <- apply(gene_df[, cols], 1, sd)
+      human_avg_sd_list[[tp]] <- data.frame(timepoint = tp, mean = avg, sd = std_dev)
+    }
+  }
+  if (length(human_avg_sd_list) > 0) {
+    combined_gene_avg_sd <- bind_rows(human_avg_sd_list)
+    human_df_list[[gene]] <- combined_gene_avg_sd
+  }
+}
+
 # Loop through each gene and create split axis plots
-for (gene in names(plot_df_list)) {
-  df <- plot_df_list[[gene]]
+for (gene in names(human_df_list)) {
+  df <- human_df_list[[gene]]
   df$timepoint <- as.numeric(as.character(df$timepoint))
 
   # Filter data for the two sections of the plot
@@ -158,7 +177,7 @@ for (gene in names(plot_df_list)) {
 # We'll need to manipulate the data and plotting for this
 
 # Combine all gene data for a facet plot
-all_human_summary <- dplyr::bind_rows(plot_df_list, .id = "gene")
+all_human_summary <- dplyr::bind_rows(human_df_list, .id = "gene")
 
 
 all_human_summary$timepoint <- as.numeric(as.character(all_human_summary$timepoint))
@@ -206,8 +225,14 @@ for (gene in unique(all_human_summary$gene)) {
   split_facet_plots_list[[gene]] <- split_facet_plot_gene(gene_data)
 }
 
-# Combine all the split facet plots (this might get crowded depending on the number of genes)
-combined_split_facet <- wrap_plots(split_facet_plots_list, ncol = 1) +
+# Assuming the names of the elements in split_facet_plots_list are the gene names
+split_facet_plots_list_titled <- lapply(names(split_facet_plots_list), function(gene_name) {
+  split_facet_plots_list[[gene_name]] +
+    ggtitle(gene_name)
+})
+
+# Now combine the titled plots
+combined_split_facet <- wrap_plots(split_facet_plots_list_titled, ncol = 1) +
   plot_annotation(
     title = "Expression Across Time (Human)",
     caption = "Error bars represent standard deviation",
@@ -221,4 +246,47 @@ ggsave(filename = "figures/all_human_genes_split_facet_expression.png",
        height = 6 * length(unique(all_human_summary$gene))) # Adjust height as needed    
        
 ```
-       
+```{r creating normal plot for mouse brain genes}
+# Prepare data for plotting
+mouse_df_list <- list()
+mouse_time_points <- c("0", "12", "24","48", "96")
+for (gene in unique(mouse_brain_counts$gene_name)) {
+  mouse_gene_df <- mouse_brain_counts %>% filter(gene_name == gene)
+  mouse_avg_sd_list <- list()
+  for (tp in mouse_time_points) {
+    cols <- grep(paste0("WT_", tp, "_"), colnames(mouse_gene_df))
+    if (length(cols) > 0) {
+      avg <- rowMeans(gene_df[, cols])
+      std_dev <- apply(gene_df[, cols], 1, sd)
+      mouse_avg_sd_list[[tp]] <- data.frame(timepoint = tp, mean = avg, sd = std_dev)
+    }
+  }
+  if (length(mouse_avg_sd_list) > 0) {
+    combined_gene_avg_sd <- bind_rows(mouse_avg_sd_list)
+    mouse_df_list[[gene]] <- combined_gene_avg_sd
+  }
+}
+
+for (gene in names(mouse_df_list)) {
+  df <- mouse_df_list[[gene]]
+  df$timepoint <- as.numeric(as.character(df$timepoint)) 
+  p <- ggplot(df, aes(x = timepoint, y = mean, group = 1)) +
+    geom_line() +
+    geom_point() +
+    geom_errorbar(aes(ymin = mean - sd, ymax = mean + sd), width = 0.2) +
+    scale_x_continuous(breaks = unique(df$timepoint)) +
+    labs(
+      title = paste(gene, "Mouse Expression Across Time"),
+      y = "Mean Count",
+      x = "Time (hours)",
+      caption = "Error bars represent standard error of the mean"
+    ) +
+    theme(
+      plot.title = element_text(hjust = 0.5, face = "bold"),
+      axis.title = element_text(face = "bold")
+    )
+
+# save the image in the figures folder
+ggsave(filename = paste0("figures/", gene, "_mouse_expression.png"), plot = p, width = 6, height = 4)
+}
+```
