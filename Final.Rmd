@@ -120,7 +120,7 @@ head(combined_avg_sd)
 Our human counts data sampled expression across a higher number of timepoints than our mouse data, so we can use a split x-axis plot to make all the smaller timepoint data visible while still showing correctly scaled late timepoint data in the second half of the graph.
 
 ### Genes of interest: HTR5A, IER3
-### Timepoints: 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 12, 24, 48, 92
+### Timepoints: 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 12, 24, 48, 96
 
 ```{r creating split-x axis plot for human brain genes}
 # Define the split point
@@ -201,47 +201,9 @@ for (gene in names(human_df_list)) {
   ggsave(filename = paste0("figures/", gene, "_human_split_expression.png"), plot = combined_plot, width = 8, height = 4)
   print(combined_plot)
 }
-
-# Now for the combined facet plot with a split axis (more complex)
-# We'll need to manipulate the data and plotting for this
-
-# Create a function to generate the split facet plot for a single gene
-split_facet_plot_gene <- function(gene_data) {
-  split_point <- 5.5
-  gene_name <- unique(gene_data$gene)
-
-  df_early <- gene_data %>% filter(timepoint <= split_point)
-  df_late <- gene_data %>% filter(timepoint >= split_point)
-  
-  y_min <- min(c(df_early$mean - df_early$sd, df_late$mean - df_late$sd))
-  y_max <- max(c(df_early$mean + df_early$sd, df_late$mean + df_late$sd))
-
-
-  p1 <- ggplot(df_early, aes(x = timepoint, y = mean, group = 1)) +
-    geom_line() +
-    geom_point() +
-    geom_errorbar(aes(ymin = mean - sd, ymax = mean + sd), width = 0.2) +
-    scale_x_continuous(breaks = unique(df_early$timepoint), limits = c(min(df_early$timepoint), split_point)) +
-    scale_y_continuous(limits = c(y_min, y_max)) + 
-    labs(y = "Mean Count") +
-    theme(axis.title.x = element_blank())
-
-  p2 <- ggplot(df_late, aes(x = timepoint, y = mean, group = 1)) +
-    geom_line() +
-    geom_point() +
-    geom_errorbar(aes(ymin = mean - sd, ymax = mean + sd), width = 0.2) +
-    scale_x_continuous(breaks = unique(df_late$timepoint), limits = c(split_point, max(df_late$timepoint))) + # Corrected line
-    scale_y_continuous(limits = c(y_min, y_max)) + 
-    theme(axis.title.y = element_blank(), axis.text.y = element_blank())
-
-  combined <- p1 + p2 + plot_layout(ncol = 2, widths = c(2, 3)) +
-    plot_annotation(title = gene_name) &
-    theme(plot.title = element_text(hjust = 0.5))
-
-  return(combined)
-}
-       
 ```
+
+## Creating facet plot of all significant orthologues
 
 ```{r creating split-x axis plot for all significant human genes}
 # Define the split point
@@ -359,10 +321,9 @@ print(facet_plot)
        
 ```
 
-## Human facet plot for comparison:
-
-![humancounts-compar](figures/all_genes_facet_expression.png)
-Here we can see that for most of the genes, the expression trends are similar from human to mouse. A couple notable exceptions are CBR3 (downregulated in human) and Cbr3 (upregulated in mouse) and DLL1 (upregulated in human) and Dll1(downregulated in mouse). Other than these two, the 0 to 96 timepoint changes between human and mouse seem to be moving in the same direction, though sometimes with different curve shapes. 
+## Creating plot for viewing counts expression in mouse brain genes.
+Genes of interest: Htr5a, Ier3
+Timepoints: 0, 12, 24, 48, 96
 
 ```{r creating normal plot for mouse brain genes}
 # Prepare data for plotting
@@ -416,9 +377,7 @@ Despite the differences in x-axis densities, we can see that the human and mouse
 ![humanhtr5a-compar](figures/IER3_human_split_expression.png)
 ![humanier3-compar](figures/HTR5A_human_split_expression.png)
 
-```{r creating split-x axis plot for all significant mouse genes}
-# Define the split point
-split_point <- 5.5
+```{r creating plot for all significant mouse genes}
 
 # Prepare data for plotting
 all_mouse_df_list <- list()
@@ -439,7 +398,7 @@ for (gene in unique(mouse_genes_of_interest_counts$gene_name)) {
   }
 }
 
-# Loop through each gene and create split axis plots
+# Loop through each gene and create plots
 for (gene in names(all_mouse_df_list)) {
   df <- all_mouse_df_list[[gene]]
   df$timepoint <- as.numeric(as.character(df$timepoint))
@@ -497,6 +456,11 @@ ggsave(filename = "figures/all_mouse_counts_facet_expression.png",
 print(facet_plot)
        
 ```
+
+## Human facet plot for comparison:
+
+![humancounts-compar](figures/all_genes_facet_expression.png)
+Here we can see that for most of the genes, the expression trends are similar from human to mouse. A couple notable exceptions are CBR3 (downregulated in human) and Cbr3 (upregulated in mouse) and DLL1 (upregulated in human) and Dll1(downregulated in mouse). Other than these two, the 0 to 96 timepoint changes between human and mouse seem to be moving in the same direction, though sometimes with different curve shapes. 
 
 ---
 title: "Analysis_of_Human_and_Mouse_Gene_Expressions"
