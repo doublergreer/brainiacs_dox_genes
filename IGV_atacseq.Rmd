@@ -1,0 +1,154 @@
+---
+title: "IGV_atacseq"
+author: "M. Cheishvili, M. Todd, T. Whittaker, R. Greer"
+date: "2025-04-4"
+output:
+  pdf_document: default
+  word_document: default
+---
+```{r setup, include=FALSE}
+# Load necessary libraries for RNA-seq analysis and visualization
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+|Human  | Mouse |
+|-----------------------|-----------------------|
+
+|   ABCC2            |             |
+|-----------------------|-----------------------|
+| ![](ATAC_SEQ_Mouse_and_Human_IGV/human_atacseq_ABCC2.png)  | ![](ATAC_SEQ_Mouse_and_Human_IGV/mouse_atacseq_ABCC2.png)  |
+
+
+|  ATP1A4           |             |
+|-----------------------|-----------------------|
+| ![](ATAC_SEQ_Mouse_and_Human_IGV/human_atacseq_ATP1A4.png)  | ![](ATAC_SEQ_Mouse_and_Human_IGV/mouse_atacseq_ATP1A4.png)  |
+
+ 
+|  BCHE           |             |
+|-----------------------|-----------------------|
+| ![](ATAC_SEQ_Mouse_and_Human_IGV/human_atacseq_BCHE.png)  | ![](ATAC_SEQ_Mouse_and_Human_IGV/mouse_atacseq_BCHE.png)  |
+ 
+
+|  BIK           |           |
+|-----------------------|-----------------------|
+| ![](ATAC_SEQ_Mouse_and_Human_IGV/human_atacseq_BIK.png)  | ![](ATAC_SEQ_Mouse_and_Human_IGV/mouse_atacseq_BIK.png)  |
+ 
+ 
+|  CBR3           |           |
+|-----------------------|-----------------------|
+| ![](ATAC_SEQ_Mouse_and_Human_IGV/human_atacseq_CBR3.png)  | ![](ATAC_SEQ_Mouse_and_Human_IGV/mouse_atacseq_CBR3.png)  |
+
+|  CCDC3           |           |
+|-----------------------|-----------------------|
+| ![](ATAC_SEQ_Mouse_and_Human_IGV/human_atacseq_CCDC3.png)  | ![](ATAC_SEQ_Mouse_and_Human_IGV/mouse_atacseq_CCDC3.png)  |
+
+|  CHAC1           |           |
+|-----------------------|-----------------------|
+| ![](ATAC_SEQ_Mouse_and_Human_IGV/human_atacseq_CHAC1.png)  | ![](ATAC_SEQ_Mouse_and_Human_IGV/mouse_atacseq_CHAC1.png)  |
+
+|  CPM           |           |
+|-----------------------|-----------------------|
+| ![](ATAC_SEQ_Mouse_and_Human_IGV/human_atacseq_CPM.png)  | ![](ATAC_SEQ_Mouse_and_Human_IGV/mouse_atacseq_CPM.png)  |
+
+|  DLL1           |           |
+|-----------------------|-----------------------|
+| ![](ATAC_SEQ_Mouse_and_Human_IGV/human_atacseq_DLL1.png)  | ![](ATAC_SEQ_Mouse_and_Human_IGV/mouse_atacseq_DLL1.png)  |
+
+|  DPPA3           |           |
+|-----------------------|-----------------------|
+| ![](ATAC_SEQ_Mouse_and_Human_IGV/human_atacseq_DPPA3.png)  | ![](ATAC_SEQ_Mouse_and_Human_IGV/mouse_atacseq_DPPA3.png)  |
+
+|  ELAVL4           |           |
+|-----------------------|-----------------------|
+| ![](ATAC_SEQ_Mouse_and_Human_IGV/human_atacseq_ELAVL4.png)  | ![](ATAC_SEQ_Mouse_and_Human_IGV/mouse_atacseq_ELAVL4.png)  |
+
+|  ETV4           |           |
+|-----------------------|-----------------------|
+| ![](ATAC_SEQ_Mouse_and_Human_IGV/human_atacseq_ETV4.png)  | ![](ATAC_SEQ_Mouse_and_Human_IGV/mouse_atacseq_ETV4.png)  |
+
+
+|  FGFR3           |           |
+|-----------------------|-----------------------|
+| ![](ATAC_SEQ_Mouse_and_Human_IGV/human_atacseq_FGFR3.png)  | ![](ATAC_SEQ_Mouse_and_Human_IGV/mouse_atacseq_FGFR3.png)  |
+
+|  GADL1           |           |
+|-----------------------|-----------------------|
+| ![](ATAC_SEQ_Mouse_and_Human_IGV/human_atacseq_GADL1.png)  | ![](ATAC_SEQ_Mouse_and_Human_IGV/mouse_atacseq_GADL1.png)  |
+
+|  GAP43           |           |
+|-----------------------|-----------------------|
+| ![](ATAC_SEQ_Mouse_and_Human_IGV/human_atacseq_GAP43.png)  | ![](ATAC_SEQ_Mouse_and_Human_IGV/mouse_atacseq_GAP43.png)  |
+
+|  GCK           |           |
+|-----------------------|-----------------------|
+| ![](ATAC_SEQ_Mouse_and_Human_IGV/human_atacseq_GCK.png)  | ![](ATAC_SEQ_Mouse_and_Human_IGV/mouse_atacseq_GCK.png)  |
+
+|  HTR5A           |           |
+|-----------------------|-----------------------|
+| ![](ATAC_SEQ_Mouse_and_Human_IGV/human_atacseq_HTR5A.png)  | ![](ATAC_SEQ_Mouse_and_Human_IGV/mouse_atacseq_HTR5A.png)  |
+
+|  IER3           |           |
+|-----------------------|-----------------------|
+| ![](ATAC_SEQ_Mouse_and_Human_IGV/human_atacseq_IER3.png)  | ![](ATAC_SEQ_Mouse_and_Human_IGV/mouse_atacseq_IER3.png)  |
+
+
+|  IGF2           |           |
+|-----------------------|-----------------------|
+| ![](ATAC_SEQ_Mouse_and_Human_IGV/human_atacseq_IGF2.png)  | ![](ATAC_SEQ_Mouse_and_Human_IGV/mouse_atacseq_IGF2.png)  |
+
+|  ITGA10           |           |
+|-----------------------|-----------------------|
+| ![](ATAC_SEQ_Mouse_and_Human_IGV/human_atacseq_ITGA10.png)  | ![](ATAC_SEQ_Mouse_and_Human_IGV/mouse_atacseq_ITGA10.png)  |
+
+
+|  LHX5           |           |
+|-----------------------|-----------------------|
+| ![](ATAC_SEQ_Mouse_and_Human_IGV/human_atacseq_LHX5.png)  | ![](ATAC_SEQ_Mouse_and_Human_IGV/mouse_atacseq_LHX5.png)  |
+
+|  LY6H           |           |
+|-----------------------|-----------------------|
+| ![](ATAC_SEQ_Mouse_and_Human_IGV/human_atacseq_LY6H.png)  | ![](ATAC_SEQ_Mouse_and_Human_IGV/mouse_atacseq_LY6H.png)  |
+
+
+|  MEI1           |           |
+|-----------------------|-----------------------|
+| ![](ATAC_SEQ_Mouse_and_Human_IGV/human_atacseq_MEI1.png)  | ![](ATAC_SEQ_Mouse_and_Human_IGV/mouse_atacseq_MEI1.png)  |
+
+
+|  OAS3           |           |
+|-----------------------|-----------------------|
+| ![](ATAC_SEQ_Mouse_and_Human_IGV/human_atacseq_OAS3.png)  | ![](ATAC_SEQ_Mouse_and_Human_IGV/mouse_atacseq_OAS3.png)  |
+
+|  OTX2           |           |
+|-----------------------|-----------------------|
+| ![](ATAC_SEQ_Mouse_and_Human_IGV/human_atacseq_OTX2.png)  | ![](ATAC_SEQ_Mouse_and_Human_IGV/mouse_atacseq_OTX2.png)  |
+
+|  PADI3           |           |
+|-----------------------|-----------------------|
+| ![](ATAC_SEQ_Mouse_and_Human_IGV/human_atacseq_PADI3.png)  | ![](ATAC_SEQ_Mouse_and_Human_IGV/mouse_atacseq_PADI3.png)  |
+
+|  PPP1R3C           |           |
+|-----------------------|-----------------------|
+| ![](ATAC_SEQ_Mouse_and_Human_IGV/human_atacseq_PPP1R3C.png)  | ![](ATAC_SEQ_Mouse_and_Human_IGV/mouse_atacseq_PPP1R3C.png)  |
+
+|  RBM24           |           |
+|-----------------------|-----------------------|
+| ![](ATAC_SEQ_Mouse_and_Human_IGV/human_atacseq_RBM24.png)  | ![](ATAC_SEQ_Mouse_and_Human_IGV/mouse_atacseq_RBM24.png)  |
+
+| RHCG           |           |
+|-----------------------|-----------------------|
+| ![](ATAC_SEQ_Mouse_and_Human_IGV/human_atacseq_RHCG.png)  | ![](ATAC_SEQ_Mouse_and_Human_IGV/mouse_atacseq_RHCG.png)  |
+
+| ROBO4           |           |
+|-----------------------|-----------------------|
+| ![](ATAC_SEQ_Mouse_and_Human_IGV/human_atacseq_ROBO4.png)  | ![](ATAC_SEQ_Mouse_and_Human_IGV/mouse_atacseq_ROBO4.png)  |
+
+| SLC40A1           |           |
+|-----------------------|-----------------------|
+| ![](ATAC_SEQ_Mouse_and_Human_IGV/human_atacseq_SLC40A1.png)  | ![](ATAC_SEQ_Mouse_and_Human_IGV/mouse_atacseq_SLC40A1.png)  |
+
+| SP5           |           |
+|-----------------------|-----------------------|
+| ![](ATAC_SEQ_Mouse_and_Human_IGV/human_atacseq_SP5.png)  | ![](ATAC_SEQ_Mouse_and_Human_IGV/mouse_atacseq_SP5.png)  |
+
+
