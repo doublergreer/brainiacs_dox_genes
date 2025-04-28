@@ -332,7 +332,9 @@ print(facet_plot)
 
 ## Creating plot for viewing counts expression in mouse brain genes.
 
-Genes of interest: Htr5a, Ier3 Timepoints: 0, 12, 24, 48, 96
+### Genes of interest: Htr5a, Ier3 
+
+### Timepoints: 0, 12, 24, 48, 96
 
 ``` r
 # Prepare data for plotting
@@ -483,7 +485,7 @@ same direction, though sometimes with different curve shapes.
 Import the conserved human and mouse genes again if you cleared your
 environment before starting this portion of the document.
 
-We will then load in the TPM datasets for both human and mouse
+## We will then load in the TPM datasets for both human and mouse
 
 We then will proceed to filter both data sets by the 36 genes that were
 found to be conserved in both human and mouse
